@@ -1,0 +1,17 @@
+{
+    "name": "ian/leet-code",
+    "autoload": {
+        "psr-4": {
+            "no3\\src\\": "no3/src"
+        }
+    },
+    "authors": [
+        {
+            "name": "Ian Chiang",
+            "email": "ianc@motom.me"
+        }
+    ],
+    "require": {
+        "phpunit/phpunit": "^9.5"
+    }
+}
