@@ -13,20 +13,27 @@ class Solution
 
         $max = 0;
 
-        for ($left = 0; $left < count($height); $left++) {
+        $leftIndex = 0;
+        $rightIndex = count($height) - 1;
 
-            for ($right = $left + 1; $right < count($height); $right++) {
+        do {
+            $leftH = $height[$leftIndex];
+            $rightH = $height[$rightIndex];
+            $finalH = min($leftH, $rightH);
 
-                $currentHeight = ($height[$left] > $height[$right]) ? $height[$right] : $height[$left];
-                $currentWidth = $right - $left;
+            $result = $finalH * ($rightIndex - $leftIndex);
 
-                $result = $currentHeight * $currentWidth;
+            $max = max($result, $max);
 
-                $max = ($result > $max) ? $result : $max;
+            if ($leftH > $rightH || $leftH === $rightH) {
 
+                $rightIndex--;
+            } else if ($leftH < $rightH) {
+
+                $leftIndex++;
             }
 
-        }
+        } while ($rightIndex > $leftIndex);
 
         return $max;
 
