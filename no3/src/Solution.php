@@ -14,52 +14,33 @@ class Solution
             return $s;
         }
 
+
         $maxResult = '';
+        for ($i = 0; $i < strlen($s); $i++) {
 
-        for ($mid = 0; $mid < strlen($s); $mid++) {
+            $odd = $this->getLongestPalindrome($s, $i, $i);
+            $oven = $this->getLongestPalindrome($s, $i, $i + 1);
 
-            if ($mid === 0) {
+            $currentResult = (strlen($odd) > strlen($oven)) ? $odd : $oven;
 
-                $maxResult = substr($s, 0, 1);
-
-            } else {
-
-                $currentResult = substr($s, $mid, 1);
-                $left = $mid - 1;
-                $right = $mid + 1;
-
-
-                $isOdd = false;
-                do {
-
-                    $leftLetter = substr($s, $left, 1);
-                    $rightLetter = substr($s, $right, 1);
-                    $currentLetter = substr($s, $mid, 1);
-
-                    if ($leftLetter === $rightLetter) {
-                        $currentResult = $leftLetter . $currentResult . $rightLetter;
-                        $left -= 1;
-                        $right += 1;
-                        $isOdd = true;
-                    } else if ($currentLetter === $rightLetter && !$isOdd) {
-                        $currentResult = $currentResult . $rightLetter;
-                        $right += 1;
-                    } else if ($currentLetter === $leftLetter && !$isOdd) {
-                        $currentResult = $leftLetter . $currentResult;
-                        $left -= 1;
-                    } else {
-                        // stop search
-                        $left = -1;
-                    }
-
-                    $maxResult = (strlen($currentResult) > strlen($maxResult)) ? $currentResult : $maxResult;
-
-                } while ($left >= 0 && $right <= strlen($s));
-
-            }
+            $maxResult = (strlen($currentResult) > strlen($maxResult)) ? $currentResult : $maxResult;
 
         }
 
         return $maxResult;
+
+    }
+
+    private function getLongestPalindrome($s, int $left, int $right)
+    {
+
+        while ($left >= 0 && $right <= strlen($s) && (substr($s, $left, 1) === substr($s, $right, 1))) {
+            $left--;
+            $right++;
+        }
+
+        return substr($s, $left + 1, $right - $left - 1);
+
     }
 }
+
