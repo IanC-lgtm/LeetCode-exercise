@@ -14,20 +14,24 @@ class Solution
             return $s;
         }
 
-
-        $maxResult = '';
+        $start = $end = 0;
         for ($i = 0; $i < strlen($s); $i++) {
 
-            $odd = $this->getLongestPalindrome($s, $i, $i);
-            $oven = $this->getLongestPalindrome($s, $i, $i + 1);
+            $oddLength = $this->getLongestPalindrome($s, $i, $i);
+            $ovenLength = $this->getLongestPalindrome($s, $i, $i + 1);
 
-            $currentResult = (strlen($odd) > strlen($oven)) ? $odd : $oven;
+            $currentLength = (($oddLength) > ($ovenLength)) ? $oddLength : $ovenLength;
 
-            $maxResult = (strlen($currentResult) > strlen($maxResult)) ? $currentResult : $maxResult;
+            if ($currentLength > ($end - $start)) {
+
+                $start = $i - floor(($currentLength - 1) / 2);
+                $end = $i + ($currentLength / 2);
+
+            }
 
         }
 
-        return $maxResult;
+        return substr($s, $start, $end - $start + 1);
 
     }
 
@@ -39,7 +43,7 @@ class Solution
             $right++;
         }
 
-        return substr($s, $left + 1, $right - $left - 1);
+        return $right - $left - 1;
 
     }
 }
