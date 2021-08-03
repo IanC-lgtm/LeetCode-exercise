@@ -12,36 +12,24 @@ class Solution
      */
     function removeNthFromEnd($head, $n)
     {
-        $totalCount = 0;
+        $dummy = new ListNode(0, $head);
 
-        $current = $head;
-        while ($current !== null) {
-            $totalCount++;
-            $current = $current->next;
+        $first = $dummy;
+        $second = $dummy;
+
+        for ($i = 0; $i < $n + 1; $i++) {
+            $first = $first->next;
         }
 
-        $removeTarget = $this->removeTarget($head, $totalCount, $totalCount - $n, 0);
-        return $removeTarget;
-
-
-    }
-
-    private function removeTarget($head, int $totalCount, int $targetIndex, $currentIndex)
-    {
-
-        if ($currentIndex + 1 === $targetIndex) {
-            //skip the link
-            $head->next = $head->next->next;
-
-        } else if ($head && $head->next && $currentIndex !== $targetIndex) {
-            // go deeper
-            $head->next = $this->removeTarget($head->next, $totalCount, $targetIndex, ++$currentIndex);
-        } else if ($head && $currentIndex === $targetIndex) {
-            // remove self
-            return $this->removeTarget($head->next, $totalCount, $targetIndex, ++$currentIndex);
+        while ($first) {
+            $first = $first->next;
+            $second = $second->next;
         }
 
-        return $head;
+        $second->next = $second->next->next;
+
+        return $dummy->next;
+
 
     }
 
