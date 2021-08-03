@@ -21,4 +21,34 @@ class SolutionTest extends TestCase
         $this->assertTrue($this->solution->isValid("()"));
     }
 
+    public function testIsValid2()
+    {
+        $this->assertTrue($this->solution->isValid("()[]{}"));
+    }
+
+
+    public function testIsValid3()
+    {
+        $this->assertFalse($this->solution->isValid("(]"));
+    }
+
+    public function testIsValid4()
+    {
+        $this->assertFalse($this->solution->isValid("([)]"));
+    }
+
+    public function testIsValid5()
+    {
+        $this->assertTrue($this->solution->isValid("{[]}"));
+    }
+
+    public function testIsValid6()
+    {
+        $this->assertFalse($this->solution->isValid("(}{)"));
+    }
+
+    public function testIsValid7()
+    {
+        $this->assertTrue($this->solution->isValid("(([]){})"));
+    }
 }
