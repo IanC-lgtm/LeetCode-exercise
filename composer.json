@@ -4,7 +4,8 @@
     "psr-4": {
       "no3\\src\\": "no3/src",
       "no4\\src\\": "no4/src",
-      "no5\\src\\": "no5/src"
+      "no5\\src\\": "no5/src",
+      "no6\\src\\": "no6/src"
     }
   },
   "authors": [
