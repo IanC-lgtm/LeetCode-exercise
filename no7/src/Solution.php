@@ -14,7 +14,7 @@ class Solution
         $stack = [];
         for ($i = 0; $i < strlen($s); $i++) {
             $tmp = end($stack);
-            if ($tmp !== false && $eg["{$tmp}"] == $s[$i]) {
+            if ($tmp && isset($eg["{$tmp}"]) && $eg["{$tmp}"] == $s[$i]) {
                 unset($stack[key($stack)]);
             } else {
                 $stack[] = $s[$i];
