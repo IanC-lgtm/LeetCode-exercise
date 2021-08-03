@@ -12,23 +12,24 @@ class Solution
      */
     function removeNthFromEnd($head, $n)
     {
-        $dummy = new ListNode(0, $head);
+        if (!$head) {
+            return null;
+        }
+        $arr = [$head->val];
+        while ($head = $head->next) {
+            $arr[] = $head->val;
+        }
+        $arr = array_reverse($arr);
 
-        $first = $dummy;
-        $second = $dummy;
-
-        for ($i = 0; $i < $n + 1; $i++) {
-            $first = $first->next;
+        $node = null;
+        foreach ($arr as $k => $v) {
+            if ($k + 1 === $n) {
+                continue;
+            }
+            $node = new ListNode($v, $node);
         }
 
-        while ($first) {
-            $first = $first->next;
-            $second = $second->next;
-        }
-
-        $second->next = $second->next->next;
-
-        return $dummy->next;
+        return $node;
 
 
     }
