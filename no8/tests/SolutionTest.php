@@ -17,9 +17,52 @@ class SolutionTest extends TestCase
         $this->solution = new Solution();
     }
 
-
-    private function arrayToListAndGetFirstNode(array $nums): ListNode
+    public function testMergeTwoLists1()
     {
+        $this->assertEquals(
+            '{"val":1,"next":{"val":1,"next":{"val":2,"next":{"val":3,"next":{"val":4,"next":{"val":4,"next":null}}}}}}'
+            ,
+            json_encode($this->solution->mergeTwoLists(
+                $this->arrayToListAndGetFirstNode([1, 2, 4]),
+                $this->arrayToListAndGetFirstNode([1, 3, 4])
+            )
+            )
+        );
+
+    }
+
+    public function testMergeTwoLists2()
+    {
+        $this->assertEquals(
+            "null"
+            ,
+            json_encode($this->solution->mergeTwoLists(
+                $this->arrayToListAndGetFirstNode([]),
+                $this->arrayToListAndGetFirstNode([])
+            )
+            )
+        );
+
+    }
+
+    public function testMergeTwoLists3()
+    {
+        $this->assertEquals(
+            '{"val":0,"next":null}',
+            json_encode($this->solution->mergeTwoLists(
+                $this->arrayToListAndGetFirstNode([]),
+                $this->arrayToListAndGetFirstNode([0])
+            )
+            )
+        );
+
+    }
+
+    private function arrayToListAndGetFirstNode(array $nums)
+    {
+        if (!$nums) {
+            return null;
+        }
 
         $firstNode = new ListNode(
             $nums[0],
