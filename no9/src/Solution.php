@@ -14,19 +14,23 @@ class Solution
         if (!$lists) {
             return null;
         }
-        if (count($lists) === 1) {
+        $amount = count($lists);
+        if ($amount === 1) {
             return $lists[0];
         }
 
-        $lastList = $this->mergeTwoLists($lists[0], $lists[1]);
+        $interval = 1;
 
-        for ($i = 2; $i < count($lists); $i++) {
+        while ($amount > $interval) {
+            for ($i = 0; $i < $amount - $interval; $i = $i + ($interval * 2)) {
 
-            $lastList = $this->mergeTwoLists($lists[$i], $lastList);
+                $lists[$i] = $this->mergeTwoLists($lists[$i], $lists[$i + $interval]);
 
+            }
+            $interval *= 2;
         }
 
-        return $lastList;
+        return $lists[0];
 
     }
 
