@@ -2,8 +2,6 @@
 
 namespace no9\src;
 
-use no8\src\ListNode;
-
 class Solution
 {
 
