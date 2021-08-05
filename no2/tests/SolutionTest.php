@@ -35,4 +35,19 @@ class SolutionTest extends TestCase
     {
         $this->assertEquals(0, $this->solution->lengthOfLongestSubstring(""));
     }
+
+    public function testLengthOfLongestSubstring5()
+    {
+        $this->assertEquals(1, $this->solution->lengthOfLongestSubstring(" "));
+    }
+
+    public function testLengthOfLongestSubstring6()
+    {
+        $this->assertEquals(3, $this->solution->lengthOfLongestSubstring("dvdf"));
+    }
+
+    public function testLengthOfLongestSubstring7()
+    {
+        $this->assertEquals(5, $this->solution->lengthOfLongestSubstring("tmmzuxt"));
+    }
 }
