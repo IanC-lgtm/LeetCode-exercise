@@ -3,6 +3,7 @@
   "autoload": {
     "psr-4": {
       "no1\\src\\": "no1/src",
+      "no2\\src\\": "no2/src",
       "no3\\src\\": "no3/src",
       "no4\\src\\": "no4/src",
       "no5\\src\\": "no5/src",
