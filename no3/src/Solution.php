@@ -10,41 +10,46 @@ class Solution
      */
     function longestPalindrome(string $s): string
     {
-        if (strlen($s) === 1 || strlen($s) === 0) {
+        if (!$s || strlen($s) === 1) {
             return $s;
         }
 
-        $start = $end = 0;
+        $start = 0;
+        $end = 0;
+
         for ($i = 0; $i < strlen($s); $i++) {
+            $oddLength = $this->get($s, $i, $i);
+            $evenLength = $this->get($s, $i, $i + 1);
 
-            $oddLength = $this->getLongestPalindrome($s, $i, $i);
-            $ovenLength = $this->getLongestPalindrome($s, $i, $i + 1);
-
-            $currentLength = (($oddLength) > ($ovenLength)) ? $oddLength : $ovenLength;
+            $currentLength = max($oddLength, $evenLength);
 
             if ($currentLength > ($end - $start)) {
+                // refresh max needle
+                $start = $i - (int)floor(($currentLength - 1) / 2);
 
-                $start = $i - floor(($currentLength - 1) / 2);
-                $end = $i + ($currentLength / 2);
-
+                // if it's even, the distance between middle and right will > 1 compare with middle to left
+                $end = $i + (int)floor($currentLength / 2);
             }
 
         }
 
         return substr($s, $start, $end - $start + 1);
 
+
     }
 
-    private function getLongestPalindrome($s, int $left, int $right)
+    private function get(string $s, int $left, int $right)
     {
-
-        while ($left >= 0 && $right <= strlen($s) && (substr($s, $left, 1) === substr($s, $right, 1))) {
+        while (
+            $left >= 0 && $right < strlen($s) &&
+            substr($s, $left, 1) === substr($s, $right, 1)
+        ) {
             $left--;
             $right++;
         }
-
         return $right - $left - 1;
 
     }
+
 }
 

@@ -19,7 +19,6 @@ class SolutionTest extends TestCase
     public function testLongestPalindrome1()
     {
         // both are ok
-        $this->assertEquals('bab', $this->solution->longestPalindrome('babad'));
         $this->assertEquals('aba', $this->solution->longestPalindrome('babad'));
     }
 
@@ -35,7 +34,6 @@ class SolutionTest extends TestCase
 
     public function testLongestPalindrome4()
     {
-        $this->assertEquals('a', $this->solution->longestPalindrome('ac'));
         $this->assertEquals('c', $this->solution->longestPalindrome('ac'));
     }
 
@@ -53,6 +51,11 @@ class SolutionTest extends TestCase
     public function testLongestPalindromeC2()
     {
         $this->assertEquals('cccccc', $this->solution->longestPalindrome('abacccccc'));
+    }
+
+    public function testLongestPalindromeC3()
+    {
+        $this->assertEquals('bacab', $this->solution->longestPalindrome('bacab'));
     }
 
 
