@@ -31,4 +31,13 @@ class SolutionTest extends TestCase
         $this->assertEquals(-1, $this->solution->search([1], 0));
     }
 
+    public function testSearch4()
+    {
+        $this->assertEquals(0, $this->solution->search([1, 3], 1));
+    }
+
+    public function testSearch5()
+    {
+        $this->assertEquals(0, $this->solution->search([3, 5, 1], 3));
+    }
 }
