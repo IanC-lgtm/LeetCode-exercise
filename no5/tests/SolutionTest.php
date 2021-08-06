@@ -43,6 +43,11 @@ class SolutionTest extends TestCase
         $this->assertCount(1, $this->solution->threeSum([1, -1, -1, 0]));
     }
 
+    public function testThreeSum6()
+    {
+        $this->assertCount(0, $this->solution->threeSum([3, -2, 1, 0]));
+    }
+
 
     public function testThreeSumC1()
     {

@@ -11,45 +11,65 @@ class Solution
      */
     function threeSum($nums)
     {
-
         if (count($nums) < 3) {
             return [];
         }
 
+        sort($nums);
         $resultArrays = [];
 
-        sort($nums);
-        for ($firstIndex = 0; $firstIndex < count($nums) - 2; $firstIndex++) {
+        for ($i = 0; $i < count($nums) - 2; $i++) {
 
-            if ($firstIndex === 0 || ($firstIndex > 0 && ($nums[$firstIndex] !== $nums[$firstIndex - 1]))) {
+            if ($i > 0 && $nums[$i] === $nums[$i - 1]) {
+                //ignore duplicate
 
-                $targetValue = 0 - $nums[$firstIndex];
-                $secondIndex = $firstIndex + 1;
-                $thirdIndex = count($nums) - 1;
+            } else {
 
-                while ($secondIndex < $thirdIndex &&
-                    $secondIndex < count($nums) - 1 &&
-                    $thirdIndex > $firstIndex + 1) {
+                $currentNum = $nums[$i];
+                $targetNumber1 = 0 - $currentNum;
 
-                    if (($nums[$secondIndex] + $nums[$thirdIndex]) === $targetValue) {
-                        $resultArrays[] = [$nums[$firstIndex], $nums[$secondIndex], $nums[$thirdIndex]];
+                $left = $i + 1;
+                $right = count($nums) - 1;
 
-                        while ($thirdIndex > $secondIndex && $nums[$thirdIndex] === $nums[$thirdIndex - 1]) $thirdIndex--;
-                        while ($thirdIndex > $secondIndex && $nums[$secondIndex] === $nums[$secondIndex + 1]) $secondIndex++;
-                        $secondIndex++;
-                        $thirdIndex--;
+                while (
+                    $right < count($nums)
+                    && $right > $left
+                ) {
 
-                    } else if ($targetValue > $nums[$secondIndex] + $nums[$thirdIndex]) {
-                        $secondIndex++;
+                    $leftNum = $nums[$left];
+                    $rightNum = $nums[$right];
+
+                    $targetNumber2 = $targetNumber1 - $leftNum;
+
+                    if ($rightNum === $targetNumber2) {
+                        $resultArrays[] = [$currentNum, $leftNum, $rightNum];
+
+                        // skip duplicate
+                        while ($left < count($nums) - 1 && $nums[$left] === $nums[$left + 1]) $left++;
+                        $left++;
+                        while ($right > 1 && $nums[$right] === $nums[$right - 1]) $right--;
+                        $right--;
+
+
+                    } else if ($rightNum > $targetNumber2) {
+                        // right too much
+
+                        // skip duplicate
+                        $right--;
+
                     } else {
-                        $thirdIndex--;
-                    }
+                        //right too less
+                        $left++;
 
+                    }
                 }
+
+
             }
 
 
         }
+
 
         return $resultArrays;
     }
