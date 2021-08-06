@@ -13,27 +13,22 @@ class Solution
 
         $max = 0;
 
-        $leftIndex = 0;
-        $rightIndex = count($height) - 1;
+        $l = 0;
+        $r = count($height) - 1;
 
-        do {
-            $leftH = $height[$leftIndex];
-            $rightH = $height[$rightIndex];
-            $finalH = min($leftH, $rightH);
+        while ($l < $r) {
 
-            $result = $finalH * ($rightIndex - $leftIndex);
+            $area = ($r - $l) * min($height[$l], $height[$r]);
 
-            $max = max($result, $max);
+            $max = max($max, $area);
 
-            if ($leftH > $rightH || $leftH === $rightH) {
-
-                $rightIndex--;
-            } else if ($leftH < $rightH) {
-
-                $leftIndex++;
+            if ($height[$l] > $height[$r] || $height[$l] === $height[$r]) {
+                $r--;
+            } else if ($height[$r] > $height[$l]) {
+                $l++;
             }
 
-        } while ($rightIndex > $leftIndex);
+        }
 
         return $max;
 
