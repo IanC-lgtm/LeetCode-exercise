@@ -6,6 +6,7 @@ class Solution
 
     private $results = [];
     private $candidates = [];
+    private $candidateCount = 0;
 
     /**
      * @param Integer[] $candidates
@@ -16,6 +17,7 @@ class Solution
     {
 
         $this->candidates = $candidates;
+        $this->candidateCount = count($candidates);
 
         $this->sum(0, $target, []);
 
@@ -23,29 +25,30 @@ class Solution
 
     }
 
-    function sum($i, $target, $currentResult = [])
+    private function sum(int $startIndex, int $target, array $resultArray)
     {
         if ($target === 0) {
-            // get result
-            $this->results[] = $currentResult;
+            $this->results[] = $resultArray;
             return;
         }
 
-        if ($i >= count($this->candidates) || $target < 0) {
-            // no need processed
-            return;
+        for ($i = $startIndex; $i < $this->candidateCount; $i++) {
+
+            $remain = $target - $this->candidates[$i];
+
+            if ($remain >= 0) {
+
+                $resultArray[] = $this->candidates[$i];
+                // recursive
+                $this->sum($i, $remain, $resultArray);
+
+                // remove the test one from current testing results
+                array_pop($resultArray);
+            }
+
         }
-
-        $currentResult[] = $this->candidates[$i];
-
-        // keep check current
-        $this->sum($i, $target - $this->candidates[$i], $currentResult);
-
-        array_pop($currentResult);
-
-        // next
-        $this->sum($i + 1, $target, $currentResult);
 
     }
+
 
 }
