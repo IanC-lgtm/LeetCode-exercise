@@ -12,34 +12,30 @@ class Solution
     function mergeTwoLists($l1, $l2)
     {
 
-        if (!$l1 && !$l2) {
-            return null;
-        }
         $dummy = new ListNode('', null);
+        $head = $dummy;
+        while ($l1 || $l2) {
 
-        $currentHead = $dummy;
-
-
-        while ($l1 && $l2) {
-
-            if ($l1->val > $l2->val) {
-                $currentHead->next = $l2;
-                $l2 = $l2->next;
-            } else {
-                $currentHead->next = $l1;
+            if (($l1 && !$l2)) {
+                $value = $l1->val;
                 $l1 = $l1->next;
+            } else if ((!$l1 && $l2)) {
+                $value = $l2->val;
+                $l2 = $l2->next;
+            } else if (($l1->val < $l2->val)) {
+                $value = $l1->val;
+                $l1 = $l1->next;
+            } else {
+                $value = $l2->val;
+                $l2 = $l2->next;
             }
 
-            $currentHead = $currentHead->next;
+            $dummy->next = new ListNode($value, null);
+
+            $dummy = $dummy->next;
 
         }
 
-        if ($l1) $currentHead->next = $l1;
-        if ($l2) $currentHead->next = $l2;
-
-
-        return $dummy->next;
-
+        return $head->next;
     }
-
 }
