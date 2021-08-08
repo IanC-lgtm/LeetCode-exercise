@@ -10,17 +10,24 @@ class Solution
      */
     function isValid($s)
     {
-        $eg = ["{" => "}", "[" => "]", "(" => ")"];
-        $stack = [];
+        $leftStacks = [];
+
+        $rightMap = [
+            ')' => '(',
+            '}' => '{',
+            ']' => '['
+        ];
         for ($i = 0; $i < strlen($s); $i++) {
-            $tmp = end($stack);
-            if ($tmp && isset($eg["{$tmp}"]) && $eg["{$tmp}"] == $s[$i]) {
-                unset($stack[key($stack)]);
+            $c = substr($s, $i, 1);
+            if (isset($rightMap[$c]) && $rightMap[$c] === end($leftStacks)) {
+                array_pop($leftStacks);
             } else {
-                $stack[] = $s[$i];
+                $leftStacks[] = $c;
             }
         }
-        return count($stack) == 0;
+
+        return count($leftStacks) === 0;
+
     }
 
 }
