@@ -10,23 +10,20 @@ class Solution
      * @param Integer[][] $matrix
      * @return NULL
      */
-    function rotate(array $matrix) {
+    function rotate(&$matrix) {
 
-        $new2D=array_slice($matrix,0);
+            $n = count($matrix[0]);
 
-        $xMax=count($matrix[0])-1;
-        for ($i=0 ; $i<count($matrix[0]);$i++) {
 
-            for ($j=0 ; $j<count($matrix[0]);$j++) {
-
-                $new2D[$j][$xMax-$i]=$matrix[$i][$j];
-
+        for ($i = 0; $i < floor(($n + 1) / 2); $i ++) {
+            for ($j = 0; $j < floor($n / 2); $j++) {
+                $temp = $matrix[$n - 1 - $j][$i];
+                $matrix[$n - 1 - $j][$i] = $matrix[$n - 1 - $i][$n - $j - 1];
+                $matrix[$n - 1 - $i][$n - $j - 1] = $matrix[$j][$n - 1 -$i];
+                $matrix[$j][$n - 1 - $i] = $matrix[$i][$j];
+                $matrix[$i][$j] = $temp;
             }
-
         }
-
-        return $new2D;
-
 
     }
 
