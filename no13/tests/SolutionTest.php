@@ -18,7 +18,7 @@ class SolutionTest extends TestCase
 
     public function test1(){
 
-        $this->assertEquals([["bat"],["nat","tan"],["ate","eat","tea"]],
+        $this->assertCount(3,
             $this->solution->groupAnagrams(["eat","tea","tan","ate","nat","bat"]));
 
     }
