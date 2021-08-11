@@ -16,5 +16,11 @@ class SolutionTest extends TestCase
         $this->solution = new Solution();
     }
 
+    public function test1(){
+
+        $this->assertEquals('',$this->solution);
+
+    }
+
 
 }
