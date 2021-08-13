@@ -13,23 +13,21 @@ class Solution
 
     private function startSort(array $nums, int $start, int $end):array
     {
-        echo json_encode($nums).PHP_EOL;
 
         $count = count($nums);
-        if($count <=2){
+
+        if($count <=1){
+
             switch ($count){
                 case  0:
                     return [];
                 case  1:
                     return [$nums[0]];
-                case  2:
-                    return ($nums[0] > $nums[1])?[$nums[1],$nums[0] ]:[$nums[0],$nums[1]];
             }
 
         }
 
         $mid=(int)floor(($end-$start) / 2);
-        echo $mid.PHP_EOL;
 
         // divide
         $leftArray=$this->startSort(array_slice($nums,$start, $mid-$start+1),$start,$mid);
