@@ -2,6 +2,7 @@
   "name": "ian/leet-code",
   "autoload": {
     "psr-4": {
+      "MergeSortExercise\\src\\": "MergeSortExercise/src",
       "no1\\src\\": "no1/src",
       "no2\\src\\": "no2/src",
       "no3\\src\\": "no3/src",
