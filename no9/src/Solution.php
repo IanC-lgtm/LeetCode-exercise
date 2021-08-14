@@ -9,67 +9,56 @@ class Solution
      * @param ListNode[] $lists
      * @return ListNode|null
      */
-    function mergeKLists($lists)
+    function mergeKLists($lists){
+
+        $listCount=count($lists);
+
+        $result=$this->startMerge($lists,0,$listCount-1);
+
+        return $result;
+
+    }
+
+    private function startMerge($lists, $start, $end)
     {
-        if (!$lists) {
+
+        echo json_encode($lists).PHP_EOL;
+
+        if(count($lists)===0){
             return null;
-        }
-        $amount = count($lists);
-        if ($amount === 1) {
+        }else if(count($lists)<=1){
             return $lists[0];
         }
 
-        $interval = 1;
+        $mid=(int)floor(($end-$start)/2);
 
-        while ($amount > $interval) {
-            for ($i = 0; $i < $amount - $interval; $i = $i + ($interval * 2)) {
+        $leftLists=$this->startMerge(array_slice($lists,$start,$mid-$start+1),0,$mid-$start);
+        $rightLists=$this->startMerge(array_slice($lists,$mid+1,$end-$mid),$start,$mid);
 
-                $lists[$i] = $this->mergeTwoLists($lists[$i], $lists[$i + $interval]);
+        $sortedResult=new ListNode('d',null);
+        $returnHead=$sortedResult;
 
+        while($leftLists && $rightLists){
+
+            if($leftLists->val > $rightLists->val){
+                $sortedResult->next=new ListNode($rightLists->val,null);
+                $rightLists=$rightLists->next;
+            }else{
+                $sortedResult->next=new ListNode($leftLists->val,null);
+                $leftLists=$leftLists->next;
             }
-            $interval *= 2;
+
+            $sortedResult=$sortedResult->next;
+
         }
 
-        return $lists[0];
+        if($leftLists)$sortedResult->next=$leftLists;
+        if($rightLists)$sortedResult->next=$rightLists;
+
+        return $returnHead->next;
+
 
     }
 
-    /**
-     * @param $l1
-     * @param $l2
-     * @return ListNode|null
-     */
-    function mergeTwoLists($l1, $l2)
-    {
-
-        if (!$l1 && !$l2) {
-            return null;
-        }
-        $dummy = new ListNode('', null);
-
-        $currentHead = $dummy;
-
-
-        while ($l1 && $l2) {
-
-            if ($l1->val > $l2->val) {
-                $currentHead->next = $l2;
-                $l2 = $l2->next;
-            } else {
-                $currentHead->next = $l1;
-                $l1 = $l1->next;
-            }
-
-            $currentHead = $currentHead->next;
-
-        }
-
-        if ($l1) $currentHead->next = $l1;
-        if ($l2) $currentHead->next = $l2;
-
-
-        return $dummy->next;
-
-    }
 
 }
