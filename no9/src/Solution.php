@@ -11,52 +11,56 @@ class Solution
      */
     function mergeKLists($lists){
 
-        $listCount=count($lists);
-
-        $result=$this->startMerge($lists,0,$listCount-1);
-
-        return $result;
-
-    }
-
-    private function startMerge($lists, $start, $end)
-    {
-
-        echo json_encode($lists).PHP_EOL;
-
         if(count($lists)===0){
             return null;
-        }else if(count($lists)<=1){
+        }
+
+        if(count($lists)===1){
             return $lists[0];
         }
 
-        $mid=(int)floor(($end-$start)/2);
+        $interval=1;
+        $count=count($lists);
 
-        $leftLists=$this->startMerge(array_slice($lists,$start,$mid-$start+1),0,$mid-$start);
-        $rightLists=$this->startMerge(array_slice($lists,$mid+1,$end-$mid),$start,$mid);
+        while($count > $interval){
 
-        $sortedResult=new ListNode('d',null);
-        $returnHead=$sortedResult;
+            for ($i=0 ; $i<$count-$interval;$i+=($interval*2)) {
 
-        while($leftLists && $rightLists){
+                $lists[$i]=$this->merge($lists[$i],$lists[$i+$interval]);
 
-            if($leftLists->val > $rightLists->val){
-                $sortedResult->next=new ListNode($rightLists->val,null);
-                $rightLists=$rightLists->next;
-            }else{
-                $sortedResult->next=new ListNode($leftLists->val,null);
-                $leftLists=$leftLists->next;
             }
 
-            $sortedResult=$sortedResult->next;
+            $interval*=2;
 
         }
 
-        if($leftLists)$sortedResult->next=$leftLists;
-        if($rightLists)$sortedResult->next=$rightLists;
+        return $lists[0];
 
-        return $returnHead->next;
 
+    }
+
+    private function merge($i1, $i2)
+    {
+
+        $result=new ListNode('d',null);
+        $head=$result;
+        while($i1 && $i2){
+
+            if($i1->val>$i2->val){
+                $result->next=$i2;
+                $i2=$i2->next;
+            }else{
+                $result->next=$i1;
+                $i1=$i1->next;
+            }
+
+            $result=$result->next;
+
+        }
+        if($i1)$result->next=$i1;
+        if($i2)$result->next=$i2;
+
+        return $head->next;
 
     }
 
