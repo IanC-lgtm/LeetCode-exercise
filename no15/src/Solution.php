@@ -31,12 +31,12 @@ class Solution
             }
 
             if($r1 < $r2 && $c1<$c2){
-
-                for ($c=$c2-1 ; $c>$c1;$c--) {
+                // handle only x total>=2 or y total>=2
+                for ($c=$c2-1 ; $c>=$c1;$c--) {
                     $result[]=$matrix[$r2][$c];
                 }
 
-                for ($r=$r2 ; $r>$r1;$r--) {
+                for ($r=$r2-1 ; $r>$r1;$r--) {
                     $result[]=$matrix[$r][$c1];
                 }
 
