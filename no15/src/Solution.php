@@ -34,20 +34,19 @@ class Solution
 
             --$y1;
 
-            for ($x2=$x1-1 ; $x2>$iteration-1;$x2--) {
+            for ($x2=$x1-1-$iteration ; $x2>$iteration-1;$x2--) {
                 $result[]=$matrix[$y1][$x2];
                 $currentX=$x2;
             }
-            --$x2;
 
-            for ($y2=$y1-1 ; $y2>$iteration;$y2--) {
+            for ($y2=$y1-1-$iteration ; $y2>$iteration;$y2--) {
                 $result[]=$matrix[$y2][$iteration];
                 $currentY=$y2;
             }
 
             $iteration++;
 
-            var_dump($result);
+            //var_dump($result);
 
         }
 
