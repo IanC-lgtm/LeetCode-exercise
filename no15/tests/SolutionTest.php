@@ -28,4 +28,22 @@ class SolutionTest extends TestCase
         $this->assertEquals([1,2,3,4,8,12,11,10,9,5,6,7],$this->solution->spiralOrder( [[1,2,3,4],[5,6,7,8],[9,10,11,12]]));
 
     }
+
+    public function test3(){
+
+        $this->assertEquals([1],$this->solution->spiralOrder([[1]]));
+
+    }
+
+    public function test4(){
+
+        $this->assertEquals([2,3],$this->solution->spiralOrder([[2,3]]));
+
+    }
+
+    public function test5(){
+
+        $this->assertEquals([7,9,6],$this->solution->spiralOrder([[7],[9],[6]]));
+
+    }
 }

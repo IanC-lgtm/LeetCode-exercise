@@ -13,7 +13,7 @@ class Solution
         $endX=(int)floor(count($matrix[0])/2);
         $endY=(int)floor(count($matrix)/2);
 
-        $currentX=0;
+        $currentX=-1;
         $currentY=0;
 
         $result=[];
@@ -25,6 +25,7 @@ class Solution
                 $currentX=$x1;
             }
 
+            if(($currentX===$endX && $currentY=== $endY)) break;
             --$x1;
 
             for ($y1=$iteration+1 ; $y1<count($matrix)-$iteration;$y1++) {
@@ -32,17 +33,20 @@ class Solution
                 $currentY=$y1;
             }
 
+            if(($currentX===$endX && $currentY=== $endY)) break;
             --$y1;
 
             for ($x2=$x1-1-$iteration ; $x2>$iteration-1;$x2--) {
                 $result[]=$matrix[$y1][$x2];
                 $currentX=$x2;
             }
+            if(($currentX===$endX && $currentY=== $endY)) break;
 
             for ($y2=$y1-1-$iteration ; $y2>$iteration;$y2--) {
                 $result[]=$matrix[$y2][$iteration];
                 $currentY=$y2;
             }
+            if(($currentX===$endX && $currentY=== $endY)) break;
 
             $iteration++;
 
