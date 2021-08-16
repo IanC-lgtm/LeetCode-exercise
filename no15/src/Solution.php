@@ -10,51 +10,49 @@ class Solution
      */
     function spiralOrder($matrix) {
 
-        $endX=(int)floor(count($matrix[0])/2);
-        $endY=(int)floor(count($matrix)/2);
+        if(count($matrix) ===0){
+            return [];
+        }
 
-        $currentX=-1;
-        $currentY=0;
+        $r1=0;
+        $c1=0;
+        $r2=count($matrix)-1;
+        $c2=count($matrix[0])-1;
 
         $result=[];
-        $iteration=0;
-        while( ! ($currentX===$endX && $currentY=== $endY)){
+        while($r1<=$r2 && $c1<=$c2){
 
-            for ($x1=$iteration ; $x1<count($matrix[0])-$iteration;$x1++) {
-                $result[]=$matrix[$iteration][$x1];
-                $currentX=$x1;
+            for ($c=$c1 ; $c<=$c2;$c++) {
+                $result[]=$matrix[$r1][$c];
             }
 
-            if(($currentX===$endX && $currentY=== $endY)) break;
-            --$x1;
-
-            for ($y1=$iteration+1 ; $y1<count($matrix)-$iteration;$y1++) {
-                $result[]=$matrix[$y1][$x1];
-                $currentY=$y1;
+            for ($r=$r1+1 ; $r<=$r2;$r++) {
+                $result[]=$matrix[$r][$c2];
             }
 
-            if(($currentX===$endX && $currentY=== $endY)) break;
-            --$y1;
+            if($r1 < $r2 && $c1<$c2){
 
-            for ($x2=$x1-1-$iteration ; $x2>$iteration-1;$x2--) {
-                $result[]=$matrix[$y1][$x2];
-                $currentX=$x2;
+                for ($c=$c2-1 ; $c>$c1;$c--) {
+                    $result[]=$matrix[$r2][$c];
+                }
+
+                for ($r=$r2 ; $r>$r1;$r--) {
+                    $result[]=$matrix[$r][$c1];
+                }
+
             }
-            if(($currentX===$endX && $currentY=== $endY)) break;
 
-            for ($y2=$y1-1-$iteration ; $y2>$iteration;$y2--) {
-                $result[]=$matrix[$y2][$iteration];
-                $currentY=$y2;
-            }
-            if(($currentX===$endX && $currentY=== $endY)) break;
 
-            $iteration++;
 
-            //var_dump($result);
+            $r1++;
+            $r2--;
+            $c1++;
+            $c2--;
 
         }
 
         return $result;
+
 
     }
 }
