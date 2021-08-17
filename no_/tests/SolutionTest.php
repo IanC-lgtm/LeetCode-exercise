@@ -27,4 +27,17 @@ class SolutionTest extends TestCase
         $this->assertEquals(false,$this->solution->canJump([3,2,1,0,4]));
 
     }
+
+    public function test3(){
+
+        $this->assertEquals(true,$this->solution->canJump([2,3,1,1,4]));
+
+    }
+
+
+    public function test4(){
+
+        $this->assertEquals(false,$this->solution->canJump([0,2,3]));
+
+    }
 }
