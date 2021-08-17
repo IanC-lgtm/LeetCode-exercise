@@ -10,31 +10,17 @@ class Solution
      */
     function canJump($nums) {
 
-        $count = count($nums) - 1;
+        $r=count($nums)-1;
 
+        for ($r2=$r-1 ; $r2>=0;$r2--) {
 
-        $l=0;
-        $r= $count;
-
-        while($l <= $r){
-
-            if($r===0){
-                return true;
+            if($nums[$r2] >= $r-$r2 ){
+                $r=$r2;
             }
-
-            if($nums[$l] >= $r-$l && $l < $r){
-                $r=$l;
-                $l=0;
-            }else{
-                $l++;
-            }
-
-
 
         }
 
-
-        return false;
+        return $r===0;
 
     }
 }
