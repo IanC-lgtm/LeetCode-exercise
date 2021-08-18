@@ -22,4 +22,21 @@ class SolutionTest extends TestCase
 
     }
 
+    public function test2(){
+
+        $this->assertEquals( [[1,5]],$this->solution->merge([[1,4],[4,5]]));
+
+    }
+
+    public function test3(){
+
+        $this->assertEquals( [[0,5]],$this->solution->merge([[1,4],[0,5]]));
+
+    }
+
+    public function test4(){
+
+        $this->assertEquals( [[1,10]],$this->solution->merge([[2,3],[4,5],[6,7],[8,9],[1,10]]));
+
+    }
 }
