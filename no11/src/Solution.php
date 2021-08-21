@@ -3,10 +3,9 @@
 namespace no11\src;
 class Solution
 {
-
     private $results = [];
+
     private $candidates = [];
-    private $candidateCount = 0;
 
     /**
      * @param Integer[] $candidates
@@ -16,37 +15,44 @@ class Solution
     function combinationSum($candidates, $target)
     {
 
-        $this->candidates = $candidates;
-        $this->candidateCount = count($candidates);
+        $candidateCount = count($candidates);
 
-        $this->sum(0, $target, []);
+        $this->candidates = $candidates;
+        if ($candidateCount === 0) {
+
+            return [];
+
+        }
+
+        $this->check(0, [], $target);
 
         return $this->results;
 
     }
 
-    private function sum(int $startIndex, int $target, array $resultArray)
+    private function check($startIndex, $currentCandidates, int $target)
     {
         if ($target === 0) {
-            $this->results[] = $resultArray;
+            $this->results[] = $currentCandidates;
             return;
         }
 
-        for ($i = $startIndex; $i < $this->candidateCount; $i++) {
-
-            $remain = $target - $this->candidates[$i];
+        for ($i = $startIndex; $i < count($this->candidates); $i++) {
+            $currentNum = $this->candidates[$i];
+            $remain = $target - $currentNum;
 
             if ($remain >= 0) {
 
-                $resultArray[] = $this->candidates[$i];
-                // recursive
-                $this->sum($i, $remain, $resultArray);
+                $currentCandidates[] = $currentNum;
+                $this->check($i, $currentCandidates, $remain);
 
-                // remove the test one from current testing results
-                array_pop($resultArray);
+                // remove last candidate, try next.
+                array_pop($currentCandidates);
             }
 
+
         }
+
 
     }
 
