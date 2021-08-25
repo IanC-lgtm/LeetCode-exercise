@@ -13,25 +13,18 @@ class Solution
         // m = rows
         // n = columns
 
-        $table=[[]];
+        $N=$n+$m-2;
 
+        $k=$m-1;
+        $res=1;
 
+        for ($i=1 ; $i<=$k;$i++) {
 
-        for ($row=0 ; $row<$m;$row++) {
-
-            for ($col=0 ; $col<$n;$col++) {
-
-                if($row===0 || $col===0){
-                    $table[$row][$col]=1;
-                }else{
-                    $table[$row][$col] =$table[$row-1][$col]+$table[$row][$col-1];
-                }
-
-            }
+            $res=$res*($N-$k+$i)/$i;
 
         }
 
-        return $table[$m-1][$n-1];
+        return $res;
 
 
     }
