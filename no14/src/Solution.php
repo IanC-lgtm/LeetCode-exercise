@@ -3,27 +3,29 @@
 namespace no14\src;
 class Solution
 {
+
     /**
      * @param Integer[] $nums
      * @return Integer
      */
-    function maxSubArray($nums) {
+    function maxSubArray($nums)
+    {
+        
+        $currentSum = 0;
+        $maxSum = $nums[0];
 
-        $max=$nums[0];
-        $currentSum=max($max,0);
+        foreach ($nums as $num) {
 
-        for ($i=1 ; $i<count($nums);$i++) {
+            $currentSum += $num;
 
-            $currentSum+=$nums[$i];
+            $maxSum = max($currentSum, $maxSum);
 
-            $max= max($max, $currentSum);
+            $currentSum = ($currentSum < 0) ? 0 : $currentSum;
 
-            // reset to 0
-            $currentSum=($currentSum<0)?0:$currentSum;
 
         }
 
-        return $max;
+        return $maxSum;
 
     }
 }
