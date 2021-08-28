@@ -7,34 +7,25 @@ class Solution
      * @param String[] $strs
      * @return String[][]
      */
-    function groupAnagrams($strs) {
+    function groupAnagrams($strs)
+    {
+        $map = [];
+        foreach ($strs as $rawStr) {
+            $sortedChars = str_split($rawStr);
+            sort($sortedChars);
 
-        $map=[];
+            $sortedStr = implode('', $sortedChars);
 
-        for ($i=0 ; $i<count($strs);$i++) {
-
-            $currentWord = $strs[$i];
-
-            $chars=str_split($currentWord);
-            sort($chars);
-
-            $sortedWord=implode('',$chars);
-
-            if(isset($map[$sortedWord])){
-                $map[$sortedWord][]=$currentWord;
-            }else{
-                $map[$sortedWord]=[$currentWord];
+            if (!isset($map[$sortedStr])) {
+                $map[$sortedStr] = [$rawStr];
+            } else {
+                $map[$sortedStr][] = $rawStr;
             }
+
         }
 
-        $result=[];
-        foreach ($map as $array) {
-
-            $result[]=$array;
-        }
-
-
-        return $result;
+        return $map;
 
     }
+
 }
