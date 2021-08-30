@@ -18,9 +18,25 @@ class SolutionTest extends TestCase
 
     public function test1(){
 
-        $this->assertEquals('',$this->solution);
+        $this->assertEquals(2,$this->solution->climbStairs(2));
 
     }
 
+    public function test2(){
 
+        $this->assertEquals(3,$this->solution->climbStairs(3));
+
+    }
+
+    public function test3(){
+
+        $this->assertEquals(5,$this->solution->climbStairs(4));
+
+    }
+
+    public function test4(){
+
+        $this->assertEquals(8,$this->solution->climbStairs(5));
+
+    }
 }
