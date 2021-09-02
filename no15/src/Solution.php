@@ -25,7 +25,7 @@ class Solution
             }
 
             $currentCol--;
-            for ($currentRow=$rStart+$round ; $currentRow<=$rEnd;$currentRow++) {
+            for ($currentRow=$rStart+1 ; $currentRow<=$rEnd;$currentRow++) {
 
                 $result[]=  $matrix[$currentRow][$currentCol];
 
@@ -33,7 +33,7 @@ class Solution
 
             $currentRow--;
             // 1 or round
-            for ($currentCol=$cEnd-$round ; $currentCol>=$cStart && ($round!==1 || $rStart!==$rEnd);$currentCol--) {
+            for ($currentCol=$cEnd-1 ; $currentCol>=$cStart && ($rStart!==$rEnd);$currentCol--) {
 
                 $result[]=  $matrix[$currentRow][$currentCol];
 
@@ -42,7 +42,7 @@ class Solution
 
             $currentCol++;
             // 1 or round
-            for ($currentRow=$rEnd-$round ; $currentRow>=$rStart+$round  && ($round!==1 || $cStart!==$cEnd);$currentRow--) {
+            for ($currentRow=$rEnd-1 ; $currentRow>=$rStart+1  && ($cStart!==$cEnd);$currentRow--) {
 
                 $result[]=  $matrix[$currentRow][$currentCol];
 
