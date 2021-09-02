@@ -10,45 +10,50 @@ class Solution
      */
     function spiralOrder($matrix) {
 
-        if(count($matrix) ===0){
-            return [];
-        }
-
-        $r1=0;
-        $c1=0;
-        $r2=count($matrix)-1;
-        $c2=count($matrix[0])-1;
-
         $result=[];
-        while($r1<=$r2 && $c1<=$c2){
+        $round=1;
+        $cStart=0;
+        $cEnd=count($matrix[0])-1;
+        $rStart=0;
+        $rEnd=count($matrix)-1;
 
-            for ($c=$c1 ; $c<=$c2;$c++) {
-                $result[]=$matrix[$r1][$c];
-            }
+        while($cEnd>=$cStart && $rEnd>=$rStart){
+            for ($currentCol=$cStart ; $currentCol<=$cEnd;$currentCol++) {
 
-            for ($r=$r1+1 ; $r<=$r2;$r++) {
-                $result[]=$matrix[$r][$c2];
-            }
-
-            if($r1 < $r2 && $c1<$c2){
-                // handle only x total>=2 or y total>=2
-                for ($c=$c2-1 ; $c>=$c1;$c--) {
-                    $result[]=$matrix[$r2][$c];
-                }
-
-                for ($r=$r2-1 ; $r>$r1;$r--) {
-                    $result[]=$matrix[$r][$c1];
-                }
+                $result[]= $matrix[$round-1][$currentCol];
 
             }
 
+            $currentCol--;
+            for ($currentRow=$rStart+$round ; $currentRow<=$rEnd;$currentRow++) {
+
+                $result[]=  $matrix[$currentRow][$currentCol];
+
+            }
+
+            $currentRow--;
+            // 1 or round
+            for ($currentCol=$cEnd-$round ; $currentCol>=$cStart && ($round!==1 || $rStart!==$rEnd);$currentCol--) {
+
+                $result[]=  $matrix[$currentRow][$currentCol];
+
+            }
 
 
-            $r1++;
-            $r2--;
-            $c1++;
-            $c2--;
+            $currentCol++;
+            // 1 or round
+            for ($currentRow=$rEnd-$round ; $currentRow>=$rStart+$round  && ($round!==1 || $cStart!==$cEnd);$currentRow--) {
 
+                $result[]=  $matrix[$currentRow][$currentCol];
+
+            }
+
+            $round++;
+
+            $cStart++;
+            $cEnd--;
+            $rStart++;
+            $rEnd--;
         }
 
         return $result;
