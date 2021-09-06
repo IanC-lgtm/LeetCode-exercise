@@ -8,21 +8,23 @@ class Solution
      * @param Integer[] $nums
      * @return Boolean
      */
-    function canJump($nums)
-    {
+    function canJump($nums) {
 
-        $count = count($nums) - 1;
-        $r = 0;
+        $targetIndex=count($nums)-1;
+        $isOk=true;
 
+        for ($i=$targetIndex ; $i>=1;$i--) {
 
-        for ($i = 0; $i <= $count; $i++) {
-
-            if($i > $r) return false;
-            $r=max($r,$nums[$i]+$i);
+            if($nums[$i-1]+ $i-1 >= $targetIndex){
+                $isOk=true;
+                $targetIndex=$i-1;
+            }else{
+                $isOk=false;
+            }
 
         }
 
-        return true;
-
+        return $isOk;
     }
+
 }

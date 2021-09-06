@@ -1,8 +1,8 @@
 <?php
 
-namespace no_\tests;
+namespace no16\tests;
 
-use no_\src\Solution;
+use no16\src\Solution;
 use PHPUnit\Framework\TestCase;
 
 class SolutionTest extends TestCase
@@ -18,7 +18,25 @@ class SolutionTest extends TestCase
 
     public function test1(){
 
-        $this->assertEquals('',$this->solution);
+        $this->assertTrue($this->solution->canJump([2,3,1,1,4]));
+
+    }
+
+    public function test2(){
+
+        $this->assertFalse($this->solution->canJump([3,2,1,0,4]));
+
+    }
+
+    public function test3(){
+
+        $this->assertTrue($this->solution->canJump([0]));
+
+    }
+
+    public function test4(){
+
+        $this->assertFalse($this->solution->canJump([0,2,3]));
 
     }
 
