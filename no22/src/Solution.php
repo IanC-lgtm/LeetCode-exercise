@@ -21,51 +21,58 @@ class Solution
 
         }
 
-        $l=0;
+        $currentLeft=0;
         $minLeft=0;
         $minLen=strlen($s)+1;
-        $currentFindCount=0;
 
-       for ($r=0 ; $r<strlen($s);$r++) {
-           $currentChar = substr($s, $r, 1);
+        $findStrCount=0;
+        for ($right=0 ; $right<strlen($s);$right++) {
+            $currentWord=substr($s,$right,1);
 
-           if(isset($charNeedCountMap[$currentChar])) {
+            if(isset($charNeedCountMap[$currentWord])){
 
-               $charNeedCountMap[$currentChar]--;
+                $charNeedCountMap[$currentWord]--;
 
-               if($charNeedCountMap[$currentChar]>=0){
-                   $currentFindCount++;
-               }
+                if($charNeedCountMap[$currentWord]>=0){
 
-               while ($currentFindCount === strlen($t)) {
+                    $findStrCount++;
 
-                   if ($minLen > ($r - $l + 1)) {
-                       $minLeft = $l;
-                       $minLen = ($r - $l + 1);
-                   }
+                }
 
-                   $currentLeftChar = substr($s, $l, 1);
-                   if (isset($charNeedCountMap[$currentLeftChar])) {
+            }
 
-                       $charNeedCountMap[$currentLeftChar] += 1;
+            while($findStrCount === strlen($t)){
 
-                       if ($charNeedCountMap[$currentLeftChar] > 0) {
-                           $currentFindCount--;
-                       }
-                   }
-                   $l++;
+                if( ($right - $currentLeft+1) <= $minLen ){
+                    // find new min window
+                    $minLeft=$currentLeft;
+                    $minLen=($right - $currentLeft+1);
+                }
 
-               }
-           }
+                $currentLeftWord=substr($s,$currentLeft,1);
 
-       }
+                if(isset($charNeedCountMap[$currentLeftWord])){
 
-        if($minLen>strlen($s))
-        {
+                    $charNeedCountMap[$currentLeftWord]++;
+                    if($charNeedCountMap[$currentLeftWord]>0){
+                        $findStrCount--;
+                    }
+
+                }
+                $currentLeft+=1;
+
+            }
+
+
+        }
+
+
+        if($minLen > strlen($s)){
             return "";
         }
 
-        return substr($s,$minLeft,$minLen);
+        return substr($s,$minLeft, $minLen);
+
 
     }
 }
