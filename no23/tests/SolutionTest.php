@@ -37,4 +37,11 @@ class SolutionTest extends TestCase
 
     }
 
+    public function test4(){
+
+        $this->assertTrue(
+            $this->solution->exist([["a"]],"a"));
+
+    }
+
 }
