@@ -16,27 +16,45 @@ class SolutionTest extends TestCase
         $this->solution = new Solution();
     }
 
-    public function test1(){
+    public function test1()
+    {
 
-        $this->assertEquals(2,$this->solution->numDecodings('12'));
-
-    }
-
-    public function test2(){
-
-        $this->assertEquals(3,$this->solution->numDecodings('226'));
+        $this->assertEquals(2, $this->solution->numDecodings('12'));
 
     }
 
-    public function test3(){
+    public function test2()
+    {
 
-        $this->assertEquals(0,$this->solution->numDecodings('0'));
+        $this->assertEquals(3, $this->solution->numDecodings('226'));
 
     }
 
-    public function test4(){
+    public function test3()
+    {
 
-        $this->assertEquals(0,$this->solution->numDecodings('06'));
+        $this->assertEquals(0, $this->solution->numDecodings('0'));
+
+    }
+
+    public function test4()
+    {
+
+        $this->assertEquals(0, $this->solution->numDecodings('06'));
+
+    }
+
+    public function test5()
+    {
+
+        $this->assertEquals(1, $this->solution->numDecodings('2101'));
+
+    }
+
+    public function test6()
+    {
+
+        $this->assertEquals(3, $this->solution->numDecodings("1201234"));
 
     }
 
