@@ -7,39 +7,39 @@ class Solution
      * @param Integer[][] $intervals
      * @return Integer[][]
      */
-    function merge($intervals) {
-
-
-        if(!$intervals){
-           return [];
-        }
+    function merge($intervals)
+    {
+        if(count($intervals)===0) return [];
 
         sort($intervals);
 
-        $results=[];
+        $result=[];
 
-        for ($i=0 ; $i<=count($intervals)-1;$i++) {
+        $result[]=$intervals[0];
 
-            $currentInterval = $intervals[$i];
+        $currentResultIndex=0;
+        for ($i=1 ; $i<count($intervals);$i++) {
 
-            $lastIndex = count($results) - 1;
+            $currentArray=$intervals[$i];
 
-            if($lastIndex===-1 || $results[$lastIndex][1] < $currentInterval[0]){
-                $results[]= $currentInterval;
-            }else{
-
-                if($results[$lastIndex][1] >= $currentInterval[0]){
-                    $results[$lastIndex][0]=min($currentInterval[0],$results[$lastIndex][0]);
-                    $results[$lastIndex][1]=max($currentInterval[1],$results[$lastIndex][1]);
-                }
-
+            if($result[$currentResultIndex][1] > $currentArray[0] && $result[$currentResultIndex][1] > $currentArray[1]){
+                // totally include current, do nothing
             }
 
+            if($result[$currentResultIndex][1] >= $currentArray[0] && $result[$currentResultIndex][1] <= $currentArray[1]){
+                // merge
+                $result[$currentResultIndex][0]=min($result[$currentResultIndex][0],$currentArray[0]);
+                $result[$currentResultIndex][1]=max($result[$currentResultIndex][1],$currentArray[1]);
+            }
+
+            if($result[$currentResultIndex][1] < $currentArray[0]){
+                //other section
+                $result[]=$currentArray;
+                $currentResultIndex++;
+            }
 
         }
 
-        return $results;
-
+        return $result;
     }
-
 }
