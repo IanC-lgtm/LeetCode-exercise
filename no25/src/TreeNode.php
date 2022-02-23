@@ -15,59 +15,32 @@ class TreeNode
         $this->right = $right;
     }
 
-    public static function arrayToBST($nums): TreeNode
-    {
-        $len = count($nums);
-        $mid = floor($len / 2);
-        $leftPart = array_slice($nums, 0, $mid);
-        $root = new TreeNode($nums[$mid]);
-        $rightPart = array_slice($nums, $mid + 1);
-
-        if (count($leftPart)) {
-            $root->left = self::arrayToBST($leftPart);
-        }
-        if (count($rightPart)) {
-            $root->right = self::arrayToBST($rightPart);
-        }
-        return $root;
-    }
-
     public static function generateFromArray($nodes = []): TreeNode
     {
 
-        $currentValue = array_pop($nodes);
-        $currentNode = null;
-
-        if (!$currentNode) {
-            // 0
-            $currentNode = new TreeNode($currentValue);
-        }
-
-        return self::tree($currentNode, $nodes);
+        return self::tree(null, $nodes, 0);
 
     }
 
-    public static function tree($root, $data): TreeNode
+    public static function tree($root, $data, $level)
     {
 
-        $currentValue = array_pop($data);
-        while ($currentValue) {
+        // Base case for recursion
+        if ($level < count($data)) {
+            $temp = new TreeNode($data[$level]);
+            $root = $temp;
 
-            if (!$root->left) {
-                // 1
-                $root->left = new TreeNode($currentValue);
-                return self::tree($root->left, array_slice($data, 0, 2));
-            }
+            // insert left child
+            $root->left = self::tree($root->left, $data,
+                2 * $level + 1);
 
-            if (!$root->right) {
-                // 2
-                $root->right = new TreeNode($currentValue);
-                return self::tree($root->right, $data);
-            }
-
+            // insert right child
+            $root->right = self::tree($root->right, $data,
+                2 * $level + 2);
         }
 
         return $root;
 
     }
+
 }

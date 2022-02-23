@@ -22,7 +22,7 @@ class SolutionTest extends TestCase
 
         $treeArray = [2, 1, 3];
 
-        $treeNode = TreeNode::arrayToBST($treeArray);
+        $treeNode = TreeNode::generateFromArray($treeArray);
         $this->assertEquals(true, $this->solution->isValidBST($treeNode));
 
     }
@@ -32,7 +32,7 @@ class SolutionTest extends TestCase
 
         $treeArray = [5, 1, 4, null, null, 3, 6];
 
-        $treeNode = TreeNode::arrayToBST($treeArray);
+        $treeNode = TreeNode::generateFromArray($treeArray);
         $this->assertEquals(false, $this->solution->isValidBST($treeNode));
 
     }
