@@ -37,4 +37,14 @@ class SolutionTest extends TestCase
 
     }
 
+    public function test3()
+    {
+
+        $treeArray = [0, 1];
+
+        $treeNode = TreeNode::generateFromArray($treeArray);
+        $this->assertEquals(false, $this->solution->isValidBST($treeNode));
+
+    }
+
 }
