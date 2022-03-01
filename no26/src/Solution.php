@@ -11,49 +11,20 @@ class Solution
      */
     function isSameTree($p, $q) {
 
-        $traveledStackP=[];
-        $traveledStackQ=[];
-
-        $resultsP=[];
-        $resultsQ=[];
-
-        while(
-            ($p || count($traveledStackP)>0) ||
-            ($q || count($traveledStackQ)>0)
-        ){
-
-            while($p || $q){
-                // keep going to left
-                $traveledStackP[]=$p;
-                $traveledStackQ[]=$q;
-
-                if($p->val !== $q->val){
-                    return false;
-                }
-
-                $p=$p->left;
-                $q=$q->left;
-
-
-            }
-
-            if($p->val !== $q->val){
-                return false;
-            }
-
-            $resultsP[]=$p->val;
-            $resultsQ[]=$q->val;
-
-            $currentP=array_pop($traveledStackP);
-            $p=($currentP->right)??null;
-
-            $currentQ=array_pop($traveledStackQ);
-            $q=($currentQ->right)??null;
-
+        if($p===null && $q===null){
+            return true;
         }
 
+        if($p===null || $q===null){
+            return false;
+        }
 
-        return $resultsP===$resultsQ;
+        if($p->val === $q->val){
+            return $this->isSameTree($p->left, $q->left) && $this->isSameTree($p->right, $q->right);
+        }
+
+        return false;
+
 
     }
 }
