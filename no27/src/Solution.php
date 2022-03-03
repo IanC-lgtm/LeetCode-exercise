@@ -11,14 +11,11 @@ class Solution
      */
     function levelOrder($root)
     {
-
-        /** @var TreeNode[] $queue */
         $queue = [];
-
-        $wrapList = [];
+        $results = [];
 
         if (!$root) {
-            return $wrapList;
+            return $results;
         }
 
         $queue[] = $root;
@@ -26,33 +23,32 @@ class Solution
         while (count($queue) > 0) {
 
             $level = count($queue);
-            $subArray = [];
+
+            $subResult = [];
 
             for ($i = 0; $i < $level; $i++) {
 
-                $firstNodeInQueue = $queue[0];
-
-                if ($firstNodeInQueue->left !== null) {
-                    $queue[] = $firstNodeInQueue->left;
+                $firstNode = $queue[0];
+                
+                if ($firstNode->left !== null) {
+                    $queue[] = $firstNode->left;
                 }
 
-                if ($firstNodeInQueue->right !== null) {
-                    $queue[] = $firstNodeInQueue->right;
+                if ($firstNode->right !== null) {
+                    $queue[] = $firstNode->right;
                 }
 
-                $last = array_shift($queue);
-
-                echo $last->val . PHP_EOL;
-
-                $subArray[] = $last->val;
+                // remove first one
+                $currentNode = array_shift($queue);
+                $subResult[] = $currentNode->val;
 
             }
 
-            $wrapList[] = $subArray;
+            $results[] = $subResult;
 
         }
 
-        return $wrapList;
+        return $results;
 
     }
 
