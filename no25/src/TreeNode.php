@@ -26,9 +26,8 @@ class TreeNode
     {
 
         // Base case for recursion
-        if ($level < count($data)) {
-            $temp = new TreeNode($data[$level]);
-            $root = $temp;
+        if ($level < count($data) && $data[$level]) {
+            $root = new TreeNode($data[$level]);
 
             // insert left child
             $root->left = self::tree($root->left, $data,
