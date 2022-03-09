@@ -36,6 +36,7 @@ class TreeNode
             // insert right child
             $root->right = self::tree($root->right, $data,
                 2 * $level + 2);
+
         }
 
         return $root;
