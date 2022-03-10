@@ -19,14 +19,16 @@ class SolutionTest extends TestCase
     public function test1()
     {
 
-        $this->assertEquals([3, 9, 20, null, null, 15, 7], $this->solution->buildTree([3, 9, 20, 15, 7], [9, 3, 15, 20, 7]));
+        $treeNode = $this->solution->buildTree([3, 9, 20, 15, 7], [9, 3, 15, 20, 7]);
+        $this->assertEquals(null, $treeNode);
 
     }
 
     public function test2()
     {
 
-        $this->assertEquals([-1], $this->solution->buildTree([-1], [-1]));
+        $treeNode = $this->solution->buildTree([-1], [-1]);
+        $this->assertEquals(null, $treeNode);
 
     }
 
